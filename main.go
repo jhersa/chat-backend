@@ -110,6 +110,11 @@ func messageClient(client *websocket.Conn, msg ChatMessage) {
 	}
 }
 
+func hardReset(w http.ResponseWriter, r *http.Request) {
+	rdb.Del("chat_messages")
+	w.Write([]byte("Hard Reset!"))
+}
+
 func main() {
 	err := godotenv.Load()
 	if err != nil {
@@ -132,6 +137,7 @@ func main() {
 
 	http.Handle("/", http.FileServer(http.Dir("./public")))
 	http.HandleFunc("/ws", handleConnections)
+	http.HandleFunc("/reset", hardReset)
 	go handleMessages()
 
 	log.Print("Server starting at ", uri)
