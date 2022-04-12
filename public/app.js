@@ -1,5 +1,5 @@
 window.addEventListener("DOMContentLoaded", (_) => {
-  let websocket = new WebSocket("ws://" + window.location.host + "/ws");
+  let websocket = new WebSocket("wss://" + window.location.host + "/ws");
   let room = document.getElementById("chat-text");
 
   websocket.addEventListener("message", function (e) {
