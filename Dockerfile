@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-FROM golang:1.18-alpine3.15 AS build
+FROM golang:1.18.1-alpine3.15 AS build
 
 WORKDIR /app
 
@@ -21,7 +21,6 @@ ENV PORT=5000
 
 COPY --from=build /app/server ./
 COPY .env ./
-COPY public/ ./public
 
 EXPOSE ${PORT}
 
